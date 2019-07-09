@@ -44,7 +44,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      //dd($request->all());
+      $dati = $request->all();
+      //dd($dati);
+      $nuovo_prodotto = new Product();
+      //oppure
+      //$nuovo_prodotto->name = $dati['name'];
+      //etc.. con tutti
+      $nuovo_prodotto->fill($dati);
+      $nuovo_prodotto->save();
+
+      //se inserisco il file store.blade.php allora
+      //retur view('store');
+      //ma è meglio non inserirlo
+      return redirect()->route('index');
     }
 
     /**

@@ -4,7 +4,7 @@
   <div class="container mt-5">
     <h1>Tutti i prodotti</h1>
     <a href="{{ route('create') }}" class="btn btn-success">Aggiungi un nuovo prodotto</a>
-    <table class="table">
+    <table class="table mt-3">
   <thead>
     <tr>
       <th >id</th>
@@ -13,6 +13,7 @@
       <th >Prezzo</th>
       <th >Prezzo scontato</th>
       <th >Categoria</th>
+      <th >Azioni</th>
     </tr>
   </thead>
   <tbody>
@@ -24,6 +25,7 @@
         <td>{{ $product->price}}</td>
         <td>{{ $product->sale_price}}</td>
         <td>{{ $product->category}}</td>
+        <td><a href="{{ route('show', $product->id) }}" class="btn btn-primary">Visualizza</a></td>
       </tr>
 
     @empty

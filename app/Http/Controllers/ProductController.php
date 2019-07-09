@@ -68,7 +68,16 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+      //dd($product_id);
+      //se cancello Product
+      //$product = Product::find($product_id);
+      if (empty($product)) {
+        abort(404);
+      }
+      // $data =[
+      //   'product'=> $product
+      // ];
+      return view('show', compact('product'));
     }
 
     /**

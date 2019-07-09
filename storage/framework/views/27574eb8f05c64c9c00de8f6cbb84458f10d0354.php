@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <h1>Tutti i prodotti</h1>
     <a href="<?php echo e(route('create')); ?>" class="btn btn-success">Aggiungi un nuovo prodotto</a>
-    <table class="table">
+    <table class="table mt-3">
   <thead>
     <tr>
       <th >id</th>
@@ -11,6 +11,7 @@
       <th >Prezzo</th>
       <th >Prezzo scontato</th>
       <th >Categoria</th>
+      <th >Azioni</th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +23,7 @@
         <td><?php echo e($product->price); ?></td>
         <td><?php echo e($product->sale_price); ?></td>
         <td><?php echo e($product->category); ?></td>
+        <td><a href="<?php echo e(route('show', $product->id)); ?>" class="btn btn-primary">Visualizza</a></td>
       </tr>
 
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>

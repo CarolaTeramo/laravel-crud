@@ -1,0 +1,1 @@
+<?php /**PATH /Applications/MAMP/htdocs/Es_5_9_Luglio_products/resources/views/includes/navbar.blade.php ENDPATH**/ ?>

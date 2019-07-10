@@ -3,7 +3,7 @@
 @section('content')
   <div class="container mt-5">
     <h1>Tutti i prodotti</h1>
-    <a href="{{ route('create') }}" class="btn btn-success">Aggiungi un nuovo prodotto</a>
+    <a href="{{ route('products.create') }}" class="btn btn-success">Aggiungi un nuovo prodotto</a>
     <table class="table mt-3">
   <thead>
     <tr>
@@ -25,7 +25,15 @@
         <td>{{ $product->price}}</td>
         <td>{{ $product->sale_price}}</td>
         <td>{{ $product->category}}</td>
-        <td><a href="{{ route('show', $product->id) }}" class="btn btn-primary">Visualizza</a></td>
+        <td><a href="{{ route('products.show', $product->id) }}" class="btn btn-primary">Visualizza</a></td>
+        <td><a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Modifica</a></td>
+        <td>
+          <form class="" action="{{ route('products.destroy', $product->id) }}" method="post">
+            @method ('DELETE')
+            @csrf
+            <input class="btn btn-danger" type="submit" name="" value="Elimina">
+          </form>
+        </td>
       </tr>
 
     @empty

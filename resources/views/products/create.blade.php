@@ -7,8 +7,8 @@
   <div class="container mt-5">
 
     <h1>Inserisci un nuovo prodotto</h1>
-    <form method="post" action="{{ route('store') }}">
-      {{-- per passare i dati devo inserire --}}
+    <form method="post" action="{{ route('products.store') }}">
+      {{-- per passare i dati devo inserire token che si aggiunge al form si mette anche nelle chiamate ajax--}}
       @csrf
     <div class="form-group">
       <label for="name">Nome prodotto</label>

@@ -15,4 +15,4 @@
 //     return view('welcome');
 // });
 
-Route::resource('/', 'ProductController');
+Route::resource('/products', 'ProductController');

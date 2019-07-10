@@ -5,7 +5,7 @@
   <div class="container mt-5">
 
     <h1>Inserisci un nuovo prodotto</h1>
-    <form method="post" action="<?php echo e(route('store')); ?>">
+    <form method="post" action="<?php echo e(route('products.store')); ?>">
       
       <?php echo csrf_field(); ?>
     <div class="form-group">

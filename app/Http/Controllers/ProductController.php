@@ -15,13 +15,13 @@ class ProductController extends Controller
     public function index()
     {
       $products = Product::all();
-      // $data = [
-      //   'products'=> $products
-      // ]
+      $data = [
+        'products'=> $products
+      ];
 
-      //return view('index', $data);
+      return view('products.index', $data);
       //oppure
-      return view('index', compact('products'));
+      //return view('index', compact('products'));
       //non ho creato la cartella products
       //se lo avessi fatto sarebbe stato products.index
     }
@@ -33,7 +33,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-      return view('create');
+      return view('products.create');
     }
 
     /**
@@ -45,19 +45,24 @@ class ProductController extends Controller
     public function store(Request $request)
     {
       //dd($request->all());
+
+      //prendo dati dal form
       $dati = $request->all();
+
       //dd($dati);
+      //creo nuovo oggetto
       $nuovo_prodotto = new Product();
       //oppure
       //$nuovo_prodotto->name = $dati['name'];
       //etc.. con tutti
+      //compila l'ggeto con questi dati
       $nuovo_prodotto->fill($dati);
       $nuovo_prodotto->save();
 
       //se inserisco il file store.blade.php allora
       //retur view('store');
       //ma è meglio non inserirlo
-      return redirect()->route('index');
+      return redirect()->route('products.index');
     }
 
     /**
@@ -66,18 +71,21 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-      //dd($product_id);
+      //dd($id);
+      // in show(Product $variabile)
       //se cancello Product
-      //$product = Product::find($product_id);
+
+      //recupero id prodotto che sta arrivando
+      $product = Product::find($id);
       if (empty($product)) {
         abort(404);
       }
       // $data =[
       //   'product'=> $product
       // ];
-      return view('show', compact('product'));
+      return view('products.show', compact('product'));
     }
 
     /**
@@ -86,9 +94,18 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        //uguale a Show
+        //recupero id
+        $product = Product::find($id);
+        if (empty($product)) {
+          abort(404);
+        }
+        $data =[
+          'product'=> $product
+        ];
+        return view('products.edit', $data);
     }
 
     /**
@@ -98,9 +115,17 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        //dd($request->all());
+        //prendo i dati dal form
+        $dati = $request->all();
+        //recupero id dal model
+        $prodotto = Product::find($id);
+        //salvo
+        $prodotto->update($dati);
+
+        return redirect()->route('products.index');
     }
 
     /**
@@ -109,8 +134,13 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        //recupero id
+        $prodotto = Product::find($id);
+        $prodotto->delete();
+
+        return redirect()->route('products.index');
+
     }
 }

@@ -44,6 +44,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+      // validazione dei dati in ingresso
+      $validatedData = $request->validate([
+        'name' => 'required|max:255|bail',
+        'description' => 'required',
+        'price' => 'required|numeric|between:0,9999.9',
+        'sale_price' => 'required|numeric|between:0,9999.9',
+        'category' => 'required|max:255',
+      ]);
+
       //dd($request->all());
 
       //prendo dati dal form
@@ -117,15 +126,24 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request->all());
-        //prendo i dati dal form
-        $dati = $request->all();
-        //recupero id dal model
-        $prodotto = Product::find($id);
-        //salvo
-        $prodotto->update($dati);
+      // validazione dei dati in ingresso
+      $validatedData = $request->validate([
+        'name' => 'required|max:255|bail',
+        'description' => 'required',
+        'price' => 'required|numeric|between:0,9999.9',
+        'sale_price' => 'required|numeric|between:0,9999.9',
+        'category' => 'required|max:255',
+      ]);
 
-        return redirect()->route('products.index');
+      //dd($request->all());
+      //prendo i dati dal form
+      $dati = $request->all();
+      //recupero id dal model
+      $prodotto = Product::find($id);
+      //salvo
+      $prodotto->update($dati);
+
+      return redirect()->route('products.index');  
     }
 
     /**
